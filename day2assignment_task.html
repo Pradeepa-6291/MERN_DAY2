@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LearnEdge</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin:0; padding:0; box‑sizing:border-box; font-family:'Poppins', sans-serif; }
+    html { scroll‑behavior: smooth; }
+    body { color:#333; line-height:1.6; }
+    header { position:sticky; top:0; background:#1e3a8a; color:white; display:flex; justify-content:space-between; align-items:center; padding:15px 50px; z-index:1000; }
+    header .logo { font-size:1.8em; font-weight:700; }
+    header nav a { color:white; margin-left:25px; text-decoration:none; font-weight:500; transition:0.3s; }
+    header nav a:hover { color:#ffdd00; }
+
+    .hero { position:relative; height:90vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; color:white; }
+    .hero::before { content:""; position:absolute; top:0; left:0; width:100%; height:100%; 
+      background-image:url('https://img.freepik.com/free-vector/geometric-science-education-background-vector-gradient-blue-digital-remix_53876-125993.jpg?semt=ais_hybrid&w=740&q=80');
+      background-size:cover; background-attachment:fixed; background-position:center; opacity:0.85; z-index:-1;
+    }
+    .hero h1 { font-size:3em; margin-bottom:20px; animation:fadeIn 2s ease-in-out; }
+    .hero p { font-size:1.5em; margin-bottom:30px; animation:fadeIn 3s ease-in-out; }
+    .hero .btn { padding:12px 25px; margin:5px; background:#ffdd00; color:#1e3a8a; font-weight:600; border:none; border-radius:5px; cursor:pointer; transition:0.3s; }
+    .hero .btn:hover { background:#f2c200; transform:scale(1.05); }
+    @keyframes fadeIn { 0%{opacity:0; transform:translateY(20px);} 100%{opacity:1; transform:translateY(0);} }
+
+    section { padding:60px 50px; }
+    h2 { font-size:2.5em; color:#1e3a8a; margin-bottom:30px; text-align:center; }
+    p { margin-bottom:20px; }
+
+    .stats { display:flex; justify-content:space-around; background:#f5f5f5; text-align:center; }
+    .stats div { flex:1; margin:0 10px; }
+    .stats div h3 { font-size:2em; color:#1e3a8a; margin-bottom:10px; }
+
+    .about-text { max-width:800px; margin:0 auto 30px; text-align:center; }
+    .mission-vision { display:flex; flex-wrap:wrap; justify-content:center; gap:40px; margin-bottom:30px; }
+    .mission-vision div { flex:1; min-width:250px; background:#f5f5f5; padding:20px; border-radius:10px; text-align:center; }
+
+    .timeline { position:relative; max-width:800px; margin:0 auto 40px; }
+    .timeline::after { content:''; position:absolute; width:6px; background:#1e3a8a; top:0; bottom:0; left:50%; transform:translateX(-50%); }
+    .timeline-item { padding:20px 40px; position:relative; width:50%; }
+    .timeline-item:nth-child(odd){ left:0; }
+    .timeline-item:nth-child(even){ left:50%; }
+    .timeline-item::before { content:''; position:absolute; width:20px; height:20px; background:#ffdd00; border-radius:50%; top:20px; right:-10px; }
+    .timeline-item:nth-child(even)::before{ left:-10px; right:auto; }
+    .timeline-item h4{ margin-bottom:5px; color:#1e3a8a; }
+
+    .team-cards { display:flex; flex-wrap:wrap; justify-content:center; gap:20px; }
+    .team-card { width:180px; text-align:center; }
+    .team-card img { width:120px; height:120px; border-radius:50%; object-fit:cover; margin-bottom:10px; }
+    .team-card h4 { color:#1e3a8a; margin-bottom:5px; }
+    .team-card p { font-size:0.95em; color:#555; }
+
+    .course-list { display:flex; flex-wrap:wrap; justify-content:center; gap:20px; }
+    .course { background:white; width:280px; border-radius:10px; box-shadow:0 5px 15px rgba(0,0,0,0.1); overflow:hidden; transition:0.3s; }
+    .course img{ width:100%; height:160px; object-fit:cover; }
+    .course h3{ margin:15px; color:#1e3a8a; }
+    .course p{ margin:0 15px 15px; font-size:0.95em; color:#555; }
+    .course button{ margin:0 15px 15px; padding:8px 15px; border:none; background:#ffdd00; color:#1e3a8a; font-weight:600; border-radius:5px; cursor:pointer; transition:0.3s; }
+    .course button:hover{ background:#f2c200; transform:scale(1.05); }
+
+    .blog-cards { display:flex; flex-wrap:wrap; justify-content:center; gap:20px; }
+    .blog-card { background:white; width:300px; border-radius:10px; box-shadow:0 5px 15px rgba(0,0,0,0.1); overflow:hidden; transition:0.3s; }
+    .blog-card img{ width:100%; height:140px; object-fit:cover; }
+    .blog-card h3{ margin:15px; color:#1e3a8a; }
+    .blog-card p{ margin:0 15px 15px; font-size:0.95em; color:#555; }
+    .blog-card button{ margin:0 15px 15px; padding:8px 15px; border:none; background:#ffdd00; color:#1e3a8a; font-weight:600; border-radius:5px; cursor:pointer; transition:0.3s; }
+    .blog-card button:hover{ background:#f2c200; transform:scale(1.05); }
+
+    .blog-search { text-align:center; margin-bottom:20px; }
+    .blog-search input[type="text"]{ padding:8px; width:250px; border-radius:5px; border:1px solid #ccc; }
+    .blog-search button{ padding:8px 12px; border:none; border-radius:5px; background:#ffdd00; color:#1e3a8a; cursor:pointer; font-weight:600; margin-left:5px; }
+    .blog-search button:hover{ background:#f2c200; }
+
+    .feedback-form { max-width:600px; margin:0 auto 40px; }
+    .feedback-form input, .feedback-form select, .feedback-form textarea { width:100%; padding:10px; margin-bottom:15px; border-radius:5px; border:1px solid #ccc; }
+    .feedback-form input[type="submit"]{ background:#ffdd00; color:#1e3a8a; font-weight:600; border:none; cursor:pointer; transition:0.3s; }
+    .feedback-form input[type="submit"]:hover{ background:#f2c200; }
+    .testimonial { background:#f5f5f5; padding:20px; margin:20px 0; border-radius:10px; }
+    .stars { color:#ffdd00; }
+
+    .faq-item { margin-bottom:15px; }
+    .faq-item input { display:none; }
+    .faq-item label { display:block; padding:10px; background:#f5f5f5; cursor:pointer; border-radius:5px; }
+    .faq-item .answer { max-height:0; overflow:hidden; transition:0.3s; padding:0 10px; }
+    .faq-item input:checked ~ .answer { max-height:200px; padding:10px; }
+
+    .contact-form input, .contact-form textarea { width:100%; padding:10px; margin-bottom:15px; border-radius:5px; border:1px solid #ccc; }
+    .contact‑form input[type="submit"] { background:#ffdd00; color:#1e3a8a; font-weight:600; border:none; cursor:pointer; transition:0.3s; }
+    .contact-form input[type="submit"]:hover { background:#f2c200; }
+
+    
+    #login-modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); justify-content:center; align-items:center; }
+    #login-modal .modal-content { background:white; padding:30px; border-radius:10px; width:350px; position:relative; }
+    #login-modal .modal-content h3 { text-align:center; margin-bottom:20px; color:#1e3a8a; }
+    #login-modal .close { position:absolute; top:10px; right:15px; cursor:pointer; font-size:1.2em; color:#1e3a8a; }
+    #login-modal input, #login-modal select { width:100%; padding:10px; margin-bottom:15px; border-radius:5px; border:1px solid #ccc; }
+    #login-modal input[type="submit"] { background:#ffdd00; color:#1e3a8a; font-weight:600; border:none; cursor:pointer; transition:0.3s; }
+    #login-modal input[type="submit"]:hover { background:#f2c200; }
+    #login-modal .social-btn { width:100%; padding:10px; margin-bottom:10px; border:none; border-radius:5px; cursor:pointer; font-weight:600; }
+    #login-modal .google { background:#db4437; color:white; }
+    #login-modal .linkedin { background:#0e76a8; color:white; }
+    #login-modal .social-btn:hover { opacity:0.9; }
+
+    footer { background:#1e3a8a; color:white; padding:40px 50px; }
+    footer .footer-flex { display:flex; flex-wrap:wrap; justify-content:space-between; gap:20px; }
+    footer div { flex:1; min-width:220px; }
+    footer h3 { margin-bottom:15px; }
+    footer a { color:white; text-decoration:none; }
+    footer a:hover { color:#ffdd00; }
+
+    @media(max-width:900px){
+      header { flex-direction:column; gap:10px; }
+      .hero h1 { font-size:2.2em; }
+      .hero p { font-size:1.2em; }
+      .course-list, .blog-cards, .team-cards, .mission-vision { flex-direction:column; align-items:center; }
+      .timeline-item { width:100%; left:0; }
+      .timeline-item:nth-child(even) { left:0; }
+      .timeline-item::before { left:-10px; right:auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">LearnEdge</div>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#about">About Us</a>
+      <a href="#courses">My Courses</a>
+      <a href="#blog">Blog</a>
+      <a href="#feedback">Feedback</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+      <a href="#login-modal" onclick="document.getElementById('login-modal').style.display='flex'">Login</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="home">
+    <h1>Empowering learners in AI & beyond</h1>
+    <p>Join thousands of learners advancing in technology</p>
+    <button class="btn">Explore Courses</button>
+    <button class="btn">Join Now</button>
+  </section>
+
+  <section class="stats">
+    <div><h3>10,000+</h3><p>Learners</p></div>
+    <div><h3>50+</h3><p>Courses</p></div>
+    <div><h3>100+</h3><p>Mentors</p></div>
+  </section>
+
+  <section id="about">
+    <h2>About Us</h2>
+    <div class="about-text">
+      <p>LearnEdge was founded in 2022 to provide world‑class online education in emerging technologies.</p>
+    </div>
+    <div class="mission-vision">
+      <div><h4>Mission</h4><p>Empower learners with the skills to succeed in the tech industry.</p></div>
+      <div><h4>Vision</h4><p>Be a global leader in online technology education.</p></div>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item"><h4>2022</h4><p>LearnEdge founded.</p></div>
+      <div class="timeline-item"><h4>2023</h4><p>50+ courses launched.</p></div>
+      <div class="timeline-item"><h4>2024</h4><p>10,000+ learners enrolled.</p></div>
+    </div>
+    <div class="team-cards">
+      <div class="team-card">
+        <img src="https://pixabay.com/get/g38ecb50f02b8a7e4f79c1b137b3c0f45b8d4adfcf8a8f4606ee1f3f7dfbb862b2d0724b651ca1de2599ba2216a650753_1280.png" alt="Dr. Sumita – AI Expert">
+        <h4>Dr. Sumita</h4>
+        <p>AI Expert</p>
+      </div>
+      <div class="team-card">
+        <img src="https://pixabay.com/get/g1a2ea8a342ad6287fcd79de3f0233a8f6bf7865af8ecaf0f4ce7c3c5b0e7d0c102c455a3e1fc0f65fc5f1a137eadfdd1_1280.png" alt="Dr. Sam – Data Science Expert">
+        <h4>Dr. Sam</h4>
+        <p>Data Science Expert</p>
+      </div>
+      <div class="team-card">
+        <img src="https://pixabay.com/get/g6f0c10d49acb388b8a7d3d28ce714cebb5ae3b1e504a0f7d72eb498c51b635e3d3206c2f825e5f02be8d4cb2ae2889f5_1280.png" alt="Dr. Sofia – Blockchain Expert">
+        <h4>Dr. Sofia</h4>
+        <p>Blockchain Expert</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="courses">
+    <h2>Our Courses</h2>
+    <div class="course-list">
+      <div class="course">
+        <img src="https://www.simplilearn.com/ice9/free_resources_article_thumb/Deep-Learning-vs-Machine-Learning.jpg" alt="Machine Learning">
+        <h3>Machine Learning</h3>
+        <p>Learn algorithms and models that make machines intelligent.</p>
+        <button>Learn More</button>
+      </div>
+      <div class="course">
+        <img src="https://ik.imagekit.io/edtechdigit/usdsi/content/images/articles/explore-the-vital-role-of-data-visualisation-in-data-science.jpeg" alt="Data Science">
+        <h3>Data Science</h3>
+        <p>Master data analytics, visualization, and decision-making skills.</p>
+        <button>Learn More</button>
+      </div>
+      <div class="course">
+        <img src="https://cdn.prod.website-files.com/61025d0c08f8a23b56de3526/683d8d60c40a15ebef81e1ee_The%20Undeniable%20Power%20of%20Data%20Storytelling.webp" alt="Data Storytelling">
+        <h3>Data Storytelling</h3>
+        <p>Communicate data insights effectively with storytelling techniques.</p>
+        <button>Learn More</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="blog">
+    <h2>Latest Blogs</h2>
+    <div class="blog-search">
+      <input type="text" placeholder="Search blogs..."><button>Search</button>
+    </div>
+    <div class="blog-cards">
+      <div class="blog-card">
+        <img src="https://cdn.prod.website-files.com/61025d0c08f8a23b56de3526/683d8d60c40a15ebef81e1ee_The%20Undeniable%20Power%20of%20Data%20Storytelling.webp" alt="Data Storytelling">
+        <h3>Data storytelling that matters</h3>
+        <p>Discover how storytelling can transform the way your data communicates insights.</p>
+        <button>Read More</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="feedback">
+    <h2>Feedback</h2>
+    <form class="feedback-form">
+      <input type="text" placeholder="Name" required>
+      <input type="email" placeholder="Email" required>
+      <select required>
+        <option value="">Select Course</option>
+        <option>Machine Learning</option>
+        <option>Data Science</option>
+        <option>Data Storytelling</option>
+      </select>
+      <textarea placeholder="Comments" rows="5" required></textarea>
+      <input type="submit" value="Submit">
+    </form>
+    <div class="testimonial"><p><span class="stars">★★★★★</span> Excellent courses and instructors!</p></div>
+    <div class="testimonial"><p><span class="stars">★★★★☆</span> Learned a lot, highly recommended.</p></div>
+  </section>
+
+  <section id="faq">
+    <h2>FAQ</h2>
+    <div class="faq-item">
+      <input type="checkbox" id="q1">
+      <label for="q1">What courses are offered?</label>
+      <div class="answer"><p>Machine Learning, Data Science, Data Storytelling, and more.</p></div>
+    </div>
+    <div class="faq-item">
+      <input type="checkbox" id="q2">
+      <label for="q2">How to enroll?</label>
+      <div class="answer"><p>Click 'Join Now' and register as a student to enroll in courses.</p></div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <form class="contact-form">
+      <input type="text" placeholder="Name" required>
+      <input type="email" placeholder="Email" required>
+      <input type="tel" placeholder="Phone" required>
+      <textarea placeholder="Message" rows="5" required></textarea>
+      <input type="submit" value="Send Message">
+    </form>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.419204020078!2d-122.08560858468169!3d37.4219997798257!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fb0fbe6d0b681%3A0x94651f2fba95ef23!2sGoogleplex!5e0!3m2!1sen!2sin!4v1616698964518!5m2!1sen!2sin" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+  </section>
+
+  <div id="login-modal" onclick="this.style.display='none'">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <span class="close" onclick="document.getElementById('login-modal').style.display='none'">&times;</span>
+      <h3>Login / Sign Up</h3>
+      <input type="text" placeholder="Name" required>
+      <input type="email" placeholder="Email" required>
+      <input type="tel" placeholder="Phone Number" required>
+      <input type="password" placeholder="Password" required>
+      <select required>
+        <option value="">Login as</option>
+        <option>Student</option>
+        <option>Teacher</option>
+      </select>
+      <input type="submit" value="Continue">
+      <button class="social-btn google">Login with Google</button>
+      <button class="social-btn linkedin">Login with LinkedIn</button>
+      <p style="text-align:center; margin-top:10px;"><a href="#">Forgot Password?</a></p>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-flex">
+      <div><h3>Contact</h3><p>Email: info@learnedge.com</p><p>Phone: +123 456 7890</p></div>
+      <div><h3>Follow Us</h3><p><a href="#">Facebook</a></p><p><a href="#">Twitter</a></p><p><a href="#">LinkedIn</a></p></div>
+      <div><h3>Newsletter</h3><input type="email" placeholder="Enter email"><button style="margin-top:10px;padding:8px 12px;border:none;border-radius:5px;background:#ffdd00;color:#1e3a8a; cursor:pointer;">Subscribe</button></div>
+    </div>
+    <p style="text-align:center;margin-top:20px;">&copy; 2025 LearnEdge. All Rights Reserved.</p>
+  </footer>
+
+</body>
+</html>
